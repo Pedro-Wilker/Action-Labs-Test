@@ -1,0 +1,9 @@
+.exchange-card {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.exchange-card:hover {
+    transform: translateY(-2px);
+}
