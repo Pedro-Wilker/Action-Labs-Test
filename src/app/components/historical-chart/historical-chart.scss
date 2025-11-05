@@ -1,0 +1,121 @@
+.historical-chart-container {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+}
+
+.chart-header {
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 1rem;
+}
+
+.period-controls .btn.active {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.stat-card {
+    border-radius: 8px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+.stat-value.text-success {
+    color: #28a745 !important;
+}
+
+.stat-value.text-danger {
+    color: #dc3545 !important;
+}
+
+.stat-value.text-primary {
+    color: #007bff !important;
+}
+
+.chart-wrapper {
+    width: 100%;
+    height: 300px;
+    overflow: visible;
+}
+
+.historical-chart {
+    width: 100%;
+    height: 100%;
+}
+
+.grid-line {
+    stroke: #e9ecef;
+    stroke-width: 1;
+    stroke-dasharray: 2, 2;
+}
+
+.chart-line {
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.chart-line.trend-up {
+    stroke: #28a745;
+}
+
+.chart-line.trend-down {
+    stroke: #dc3545;
+}
+
+.chart-line.trend-stable {
+    stroke: #007bff;
+}
+
+.data-point {
+    fill: #007bff;
+    transition: all 0.2s ease;
+}
+
+.data-point:hover {
+    fill: #0056b3;
+    r: 4;
+    cursor: pointer;
+}
+
+.axis-line {
+    stroke: #6c757d;
+    stroke-width: 1;
+}
+
+.axis-label {
+    font-size: 10px;
+    fill: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .historical-chart-container {
+        padding: 1rem;
+    }
+
+    .chart-wrapper {
+        height: 250px;
+    }
+
+    .period-controls .btn {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .chart-wrapper {
+        height: 200px;
+    }
+
+    .stat-card {
+        padding: 0.5rem;
+    }
+
+    .stat-value.h5 {
+        font-size: 1rem;
+    }
+}
