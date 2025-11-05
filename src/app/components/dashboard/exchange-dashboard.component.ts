@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { ExchangeApiService } from '../../services/exchange-api.service';
 import { CurrentExchangeRate } from '../../models/exchange-rate.model';
 
+
 @Component({
   selector: 'app-exchange-dashboard',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './exchange-dashboard.html',
-  styleUrl: './exchange-dashboard.scss'
+  templateUrl: './exchange-dashboard.component.html',
+  styleUrls: ['./exchange-dashboard.component.scss']
 })
-
 export class ExchangeDashboardComponent implements OnInit {
   private exchangeService = inject(ExchangeApiService);
 
@@ -23,7 +23,7 @@ export class ExchangeDashboardComponent implements OnInit {
   currencyCode = ''; 
 
   ngOnInit() {
-  
+ 
   }
 
 
@@ -40,14 +40,13 @@ export class ExchangeDashboardComponent implements OnInit {
     this.currentRate.set(null);
     this.showHistory.set(false);
 
-    console.log(`Buscando taxa de câmbio para: ${code}`);
 
     this.exchangeService.getCurrentRate(code).subscribe({
       next: (rate) => {
         this.currentRate.set(rate);
         this.loading.set(false);
         this.generateHistoricalData(rate);
-        console.log(`Taxa carregada com sucesso: ${rate.fromSymbol}/${rate.toSymbol} = ${rate.rate}`);
+    
       },
       error: (err) => {
         this.error.set(err.message || 'Erro ao buscar taxa de câmbio');
@@ -57,35 +56,23 @@ export class ExchangeDashboardComponent implements OnInit {
     });
   }
 
-  /**
-   * Alterna a exibição dos dados históricos
-   *
-   * DECISÃO: Signal reativo que controla a visibilidade
-   * da seção de histórico
-   */
+ 
   toggleHistory() {
     this.showHistory.set(!this.showHistory());
-    console.log(`Histórico ${this.showHistory() ? 'exibido' : 'oculto'}`);
+
   }
 
-  /**
-   * Gera dados históricos simulados para demonstração
-   *
-   * EM PRODUÇÃO: Substituir por chamada real à API
-   * de dados históricos
-   */
+ 
   private generateHistoricalData(currentRate: CurrentExchangeRate) {
     const historical = [];
     const baseRate = currentRate.rate;
     const today = new Date();
 
-    // Gera 30 dias de dados históricos
     for (let i = 30; i >= 1; i--) {
       const date = new Date(today);
       date.setDate(today.getDate() - i);
 
-      // Simula variação aleatória nos dados
-      const variation = (Math.random() - 0.5) * 0.1; // ±5%
+      const variation = (Math.random() - 0.5) * 0.1; 
       const dayRate = baseRate * (1 + variation);
 
       const open = dayRate * (1 + (Math.random() - 0.5) * 0.02);
@@ -105,6 +92,5 @@ export class ExchangeDashboardComponent implements OnInit {
     }
 
     this.historicalData.set(historical);
-    console.log(`Dados históricos gerados: ${historical.length} dias`);
   }
 }

@@ -8,14 +8,15 @@ import { HistoricalExchangeData, HistoricalRatePoint } from '../../models/exchan
   selector: 'app-historical-chart',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './historical-chart.html',
-  styleUrl: './historical-chart.scss'
+  templateUrl: './historical-chart.component.html',
+  styleUrls: ['./historical-chart.component.scss']
 })
 export class HistoricalChartComponent implements OnInit, OnChanges {
   @Input() currency!: string;
   @Input() initialPeriod: number = 30;
 
   private exchangeService = inject(ExchangeApiService);
+
   historicalData = signal<HistoricalExchangeData | null>(null);
   loading = signal(false);
   error = signal<string | null>(null);
@@ -26,22 +27,20 @@ export class HistoricalChartComponent implements OnInit, OnChanges {
   padding = { top: 20, right: 30, bottom: 40, left: 50 };
 
   chartPath = '';
-  dataPoints: Array<{x: number, y: number, date: string, rate: number}> = [];
+  dataPoints: Array<{ x: number, y: number, date: string, rate: number }> = [];
   gridLines = { x: [] as number[], y: [] as number[] };
-  xAxisLabels: Array<{x: number, text: string}> = [];
-  yAxisLabels: Array<{y: number, text: string}> = [];
+  xAxisLabels: Array<{ x: number, text: string }> = [];
+  yAxisLabels: Array<{ y: number, text: string }> = [];
 
   ngOnInit() {
     this.loadHistoricalData();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-   
     if (changes['currency'] && !changes['currency'].firstChange) {
       this.loadHistoricalData();
     }
   }
-
 
   loadHistoricalData() {
     if (!this.currency) return;
@@ -61,6 +60,7 @@ export class HistoricalChartComponent implements OnInit, OnChanges {
       }
     });
   }
+
 
   private calculateChartData(data: HistoricalExchangeData) {
     if (!data.rates.length) return;
@@ -95,7 +95,6 @@ export class HistoricalChartComponent implements OnInit, OnChanges {
     this.calculateAxisLabels(rates, minValue, maxValue, plotWidth, plotHeight);
   }
 
-  
   private calculateGridLines(plotWidth: number, plotHeight: number) {
     this.gridLines.x = [];
     this.gridLines.y = [];
@@ -103,12 +102,13 @@ export class HistoricalChartComponent implements OnInit, OnChanges {
     for (let i = 0; i <= 4; i++) {
       this.gridLines.x.push(this.padding.left + (i / 4) * plotWidth);
     }
+
     for (let i = 0; i <= 4; i++) {
       this.gridLines.y.push(this.padding.top + (i / 4) * plotHeight);
     }
   }
 
- 
+
   private calculateAxisLabels(
     rates: HistoricalRatePoint[],
     minValue: number,
@@ -116,7 +116,6 @@ export class HistoricalChartComponent implements OnInit, OnChanges {
     plotWidth: number,
     plotHeight: number
   ) {
-    
     this.xAxisLabels = [];
     if (rates.length > 0) {
       const step = Math.max(1, Math.floor(rates.length / 4));
@@ -143,7 +142,6 @@ export class HistoricalChartComponent implements OnInit, OnChanges {
     this.loadHistoricalData();
   }
 
- 
   getStatistics() {
     const data = this.historicalData();
     if (!data) return [];
