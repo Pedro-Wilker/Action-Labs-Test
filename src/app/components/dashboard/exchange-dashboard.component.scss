@@ -1,4 +1,3 @@
-/* Estilos Globais */
 :host {
   display: block;
   min-height: 100vh;
@@ -6,7 +5,6 @@
   background-color: #FFFFFF;
 }
 
-/* Header */
 .app-header {
   padding: 20px;
   text-align: center;
@@ -25,7 +23,6 @@
   }
 }
 
-/* Main Content */
 .app-main {
   max-width: 330px;
   margin: 0 auto;
@@ -33,7 +30,6 @@
   text-align: center;
 }
 
-/* Título */
 .app-title {
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
@@ -44,7 +40,6 @@
   margin: 20px 0;
 }
 
-/* Input */
 .search-container {
   margin-bottom: 20px;
 }
@@ -67,7 +62,6 @@
   }
 }
 
-/* Botão */
 .exchange-button {
   background: #07B0FB;
   color: #FFFFFF;
@@ -94,7 +88,6 @@
   }
 }
 
-/* Componente de Resultado */
 .result-container {
   background: rgba(7, 176, 251, 0.1);
   padding: 20px;
@@ -151,7 +144,6 @@
   font-weight: 700;
 }
 
-/* Loading State */
 .loading-container {
   text-align: center;
   padding: 40px 0;
@@ -172,7 +164,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Error State */
 .error-container {
   background: #FFEBEE;
   border: 1px solid #F44336;
@@ -193,7 +184,6 @@
   margin-top: 10px;
 }
 
-/* Dados Históricos */
 .history-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -263,7 +253,6 @@
   margin-right: 4px;
 }
 
-/* Footer */
 .app-footer {
   background: #07B0FB;
   color: #FFFFFF;
@@ -279,7 +268,6 @@
   left: 0;
 }
 
-/* Responsividade Desktop */
 @media (min-width: 768px) {
   .app-main {
     max-width: 600px;
