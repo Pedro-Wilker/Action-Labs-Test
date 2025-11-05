@@ -55,8 +55,6 @@ export class ExchangeApiService {
 
 
   getHistoricalRates(toCurrency: string, days: number = 30): Observable<HistoricalExchangeData> {
-    console.log(`Gerando dados históricos simulados para ${toCurrency} (${days} dias)`);
-
     return this.getCurrentRate(toCurrency).pipe(
       map(currentRate => this.generateHistoricalData(currentRate, days))
     );

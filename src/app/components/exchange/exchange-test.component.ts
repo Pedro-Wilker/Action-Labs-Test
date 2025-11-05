@@ -18,7 +18,7 @@ export class ExchangeTestComponent implements OnInit {
   error: string | null = null;
 
   ngOnInit() {
-    console.log('Componente de teste da API BRL Exchange inicializado');
+
   }
 
   loadRates() {
@@ -26,18 +26,15 @@ export class ExchangeTestComponent implements OnInit {
     this.error = null;
     this.rates = [];
 
-    console.log('Iniciando consulta à API BRL Exchange...');
 
     this.exchangeService.getAllCurrentRates().subscribe({
       next: (rates) => {
         this.rates = rates;
         this.loading = false;
-        console.log('Taxas carregadas com sucesso:', rates);
       },
       error: (err) => {
         this.error = err.message;
         this.loading = false;
-        console.error('Erro ao carregar taxas:', err);
       }
     });
   }

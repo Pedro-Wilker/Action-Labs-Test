@@ -23,7 +23,7 @@ export class ExchangeDashboardComponent implements OnInit {
   currencyCode = ''; 
 
   ngOnInit() {
-    console.log('BRL Exchange Rate Dashboard inicializado');
+ 
   }
 
 
@@ -40,14 +40,13 @@ export class ExchangeDashboardComponent implements OnInit {
     this.currentRate.set(null);
     this.showHistory.set(false);
 
-    console.log(`Buscando taxa de câmbio para: ${code}`);
 
     this.exchangeService.getCurrentRate(code).subscribe({
       next: (rate) => {
         this.currentRate.set(rate);
         this.loading.set(false);
         this.generateHistoricalData(rate);
-        console.log(`Taxa carregada com sucesso: ${rate.fromSymbol}/${rate.toSymbol} = ${rate.rate}`);
+    
       },
       error: (err) => {
         this.error.set(err.message || 'Erro ao buscar taxa de câmbio');
@@ -60,7 +59,7 @@ export class ExchangeDashboardComponent implements OnInit {
  
   toggleHistory() {
     this.showHistory.set(!this.showHistory());
-    console.log(`Histórico ${this.showHistory() ? 'exibido' : 'oculto'}`);
+
   }
 
  
@@ -93,6 +92,5 @@ export class ExchangeDashboardComponent implements OnInit {
     }
 
     this.historicalData.set(historical);
-    console.log(`Dados históricos gerados: ${historical.length} dias`);
   }
 }
