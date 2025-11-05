@@ -7,8 +7,8 @@ import { CurrentExchangeRate } from '../../models/exchange-rate.model';
   selector: 'app-exchange-test',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './exchange-test.html',
-  styleUrl: './exchange-test.scss'
+  templateUrl: './exchange-test.component.html',
+  styleUrls: ['./exchange-test.component.scss']
 })
 export class ExchangeTestComponent implements OnInit {
   private exchangeService = inject(ExchangeApiService);

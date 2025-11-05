@@ -7,11 +7,8 @@ import { environment } from '../../environments/environment';
 import {
   CurrentExchangeResponse,
   CurrentExchangeRate,
-  CurrentRateParams,
   HistoricalExchangeData,
   HistoricalRatePoint,
-  HistoricalRateParams,
-  HistoricalExchangeResponse
 } from '../models/exchange-rate.model';
 
 @Injectable({
@@ -33,6 +30,7 @@ export class ExchangeApiService {
         if (!response.success) {
           throw new Error('Falha ao obter taxa de câmbio');
         }
+
         return {
           currency: fromCurrency,
           rate: response.exchangeRate,
@@ -45,7 +43,6 @@ export class ExchangeApiService {
     );
   }
 
-  
   getAllCurrentRates(): Observable<CurrentExchangeRate[]> {
     const requests = environment.supportedCurrencies.map(currency =>
       this.getCurrentRate(currency)
@@ -65,7 +62,7 @@ export class ExchangeApiService {
     );
   }
 
-
+ 
   private generateHistoricalData(currentRate: CurrentExchangeRate, days: number): HistoricalExchangeData {
     const rates: HistoricalRatePoint[] = [];
     const endDate = new Date();
@@ -92,6 +89,7 @@ export class ExchangeApiService {
         currency: currentRate.toSymbol
       });
     }
+
     const min = Math.min(...rateValues);
     const max = Math.max(...rateValues);
     const average = rateValues.reduce((sum, rate) => sum + rate, 0) / rateValues.length;
@@ -119,21 +117,18 @@ export class ExchangeApiService {
     };
   }
 
- 
+
   private handleError(error: HttpErrorResponse | Error): Observable<never> {
     let errorMessage: string;
 
     if (error instanceof HttpErrorResponse) {
-  
+      
       if (error.status === 0) {
         errorMessage = 'Erro de rede: Não foi possível conectar ao serviço de câmbio';
-      } else if (error.status === 429) {
-        errorMessage = 'Limite de requisições excedido: Aguarde antes de fazer outra consulta';
       } else {
         errorMessage = `Erro na API: ${error.message}`;
       }
     } else {
-     
       errorMessage = `Erro na aplicação: ${error.message}`;
     }
 
