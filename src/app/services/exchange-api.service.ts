@@ -44,7 +44,7 @@ export class ExchangeApiService {
   }
 
   getAllCurrentRates(): Observable<CurrentExchangeRate[]> {
-    const requests = environment.supportedCurrencies.map(currency =>
+    const requests = environment.suggestedCurrencies.map(currency =>
       this.getCurrentRate(currency)
     );
 
